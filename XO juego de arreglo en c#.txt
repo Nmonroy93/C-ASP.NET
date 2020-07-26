@@ -1,0 +1,31 @@
+public static void Main() {
+      
+  string equis = "X";
+  string ceros = "O";
+  string espacio = "";
+    int str_valor = 0;
+  int matriz = 4;
+
+  
+
+  // Se recorren las filas
+  for(int intRow = 0; intRow < matriz; intRow++){
+    // Se recorren las columnas
+    for(int intCol = 0; intCol < matriz; intCol++){
+      
+      if(intCol % 2 == 0){
+        Console.Write(equis);
+      } else{
+        Console.Write(ceros);
+      }
+    }
+	equis=ceros;
+	equis=ceros;
+	espacio=ceros;
+ 
+
+
+    // Salto de línea
+    Console.WriteLine();
+  }
+}

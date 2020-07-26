@@ -1,0 +1,33 @@
+int[] A = new int[] { 2, 3, 1, 5, 8, 3, 2, 7, 9, 4, 6 };
+            int[] R = new int[10];
+ 
+            foreach (int elemento in A)
+            {
+                R[elemento]++;
+            }
+ 
+            for (int ir = 0; ir < R.Length; ir++)
+            {
+                if (R[ir] > 0)
+                {
+                    Console.WriteLine("El elemento {0} aparece {1} veces.", ir, R[ir]);
+                }
+            }
+			
+			
+			
+			
+			
+			public static void Main() {
+  int a,b=0;
+    for(int i=myArray.Length-1 ; i>-1 ; i--)
+        {
+            a = myArray[i];
+
+            if(a > b)
+            {
+                b=a;    
+            }
+        }
+    Console.WriteLine(b);
+}

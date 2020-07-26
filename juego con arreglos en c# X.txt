@@ -1,0 +1,28 @@
+static int n = 5;
+public static void Main() {
+    // Variables de color
+  string strFirstColor = "X";
+  string strSecondColor = "_";
+  string strTempColor = "";
+  
+  // Se recorren las filas
+  for(int intRow = 0; intRow < n; intRow++){
+    // Se recorren las columnas
+    for(int intCol = 0; intCol < n; intCol++){
+      // Se verifica si es múltiplo de 2.
+      if(intCol % 2 == 0){
+        Console.Write(strFirstColor);
+      } else{
+        Console.Write(strSecondColor);
+      }
+    }
+	
+    // Se cambian los colores
+    strTempColor = strFirstColor;
+    strFirstColor = strSecondColor;
+    strSecondColor = strTempColor;
+
+    // Salto de línea
+    Console.WriteLine();
+  }
+}
