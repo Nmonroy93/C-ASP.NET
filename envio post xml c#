@@ -1,0 +1,46 @@
+public XmlDocument Post("url de la api", "<SolicitaTokenRequest><usuario>'usuario'</usuario><apikey>'apikey o token'</apikey></SolicitaTokenRequest>", "mi xml que le envie con id autogenerado")
+        {
+            XmlDocument xmlResponse = new XmlDocument();
+            try
+            {
+                
+                System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072; //TLS 1.2
+
+                var request = (HttpWebRequest)WebRequest.Create(Url);
+                var postData = "";
+                postData = XML_DATA;
+
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(postData);
+
+                var data = Encoding.UTF8.GetBytes(xmlDoc.InnerXml);
+                if(!string.IsNullOrEmpty(Token))
+                    request.Headers.Add("authorization", "Bearer " + Token.Trim());
+                request.Method = "POST";
+                request.ContentType = "application/xml";
+                request.ContentLength = data.Length;
+
+                using (var stream = request.GetRequestStream()){
+                    stream.Write(data, 0, data.Length);
+                }
+
+                var response = (HttpWebResponse)request.GetResponse();
+                string responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                
+                xmlResponse.LoadXml(responseString);
+
+            }
+            catch(Exception ex) {
+                string Mensaje = "Erro al consultar WS " + Url + " Exception: " + ex.Message;
+                string XML_Errore = "<ErrorPOST><Error>" + Mensaje + "</Error></ErrorPOST>";
+                xmlResponse.LoadXml(XML_Errore);
+            }
+
+            return xmlResponse;
+
+        }
+		
+		
+		
+		2020-05-14T22:56:05
