@@ -1,0 +1,39 @@
+HTML
+<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+      <ContentTemplate>
+      <asp:Label ID="lbl" runat="server" Text="Programming Language:"></asp:Label>
+  <asp:DropDownList ID="ddl_Languages" runat="server" Height="17px" Width="301px" AutoPostBack="True">
+  </asp:DropDownList>
+          </ContentTemplate>
+      <Triggers>
+              <asp:AsyncPostBackTrigger ControlID="ddl_Languages" 
+                  EventName="SelectedIndexChanged" />
+          </Triggers>
+  </asp:UpdatePanel>
+
+C#
+protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                SqlConnection sqlconn = new SqlConnection("Data Source=YourDataServer;Initial Catalog=TutorialsPanel;Integrated Security=True;Pooling=False");
+                SqlDataAdapter da = new SqlDataAdapter();
+                SqlCommand cmd = new SqlCommand("Select * FROM ProgrammingLanguage Order by LanguageName");
+                DataTable dtLanguages = new DataTable();
+                da.SelectCommand = cmd;
+                da.SelectCommand.Connection = sqlconn;
+                da.Fill(dtLanguages);
+                ddl_Languages.DataSource = dtLanguages;
+                ddl_Languages.DataTextField = "LanguageName";
+                ddl_Languages.DataValueField = "ID";
+                ddl_Languages.DataBind();
+  }
+        }
+
+
+C#
+protected void ddl_Languages_SelectedIndexChanged(object sender, EventArgs e)
+{
+    string msg = ddl_Languages.SelectedItem.Text;
+    ScriptManager.RegisterClientScriptBlock(sender as Control, this.GetType(), "alert", "alert('" + msg + "')", true);
+}
