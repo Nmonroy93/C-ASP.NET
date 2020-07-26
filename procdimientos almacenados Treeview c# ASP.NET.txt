@@ -1,0 +1,55 @@
+use database
+go
+
+create procedure [dbo].[Sp_traer_nombre_de_empleado_por_id]
+@id int
+as
+
+SELECT 
+      [NombreCompleto] as nombre
+
+  FROM [Examen].[dbo].[Empleado] where IdEmpleado=@id
+GO
+
+
+
+
+
+CREATE procedure [dbo].[Sp_traer_habilidad_por_id]
+@id int
+as
+
+SELECT 
+      [NombreHabilidad]
+  FROM [Examen].[dbo].[Empleado_Habilidad] where IdEmpleado=@id
+GO
+/****** Object:  StoredProcedure [dbo].[sp_traer_jefe_dropdowlist]    Script Date: 26/7/2020 01:34:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+create procedure [dbo].[Sp_traer_empleados_para_treeview]
+as
+
+SELECT IdEmpleado, NombreCompleto FROM Empleado
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_traer_empleados_para_treeview_2]    Script Date: 26/7/2020 01:34:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[Sp_traer_empleados_para_treeview_2]
+@id int
+as
+
+SELECT IdEmpleado, NombreCompleto FROM Empleado WHERE IdJefe = @id
+GO
+/****** Object:  StoredProcedure [dbo].[Sp_traer_empleados_por_area]    Script Date: 26/7/2020 01:34:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
